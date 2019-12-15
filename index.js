@@ -118,6 +118,9 @@ class Lambdasian {
     this.age = person.age;
     this.location = person.location;
   }
+  speak() {
+    return `Hello my name is ${this.name}, I am from ${this.location}.`;
+  }
 }
 
 /*
@@ -134,7 +137,25 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian {
+  constructor(person) {
+    super(person);
+    this.specialty = person.specialty;
+    this.favLanguage = person.favLanguage;
+    this.catchPhrase = person.catchPhrase;
+  }
+  demo(subject) {
+    return `Today we are learning about ${subject}`;
+  }
+  grade(student, subject) {
+    return `${student.name} receives a perfect score on ${subject}`;
+  }
+  // stretch 
+  assignGrades(min, max, grade){
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return grade - (Math.floor(Math.random() * (max - min + 1)) + min);
+  }
 
 }
 
@@ -153,7 +174,32 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian {
+  constructor(person) {
+    super(person);
+    this.previousBackground = person.previousBackground;
+    this.className = person.className;
+    this.favSubjects = person.favSubjects;
+    // Stretch
+    this.grade = 90;
+  }
+  listSubjects() {
+    return `${this.favSubjects}`
+  }
+  PRAssignment(subject) {
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+  sprintChallenge(subject) {
+    return `${this.name} has begun a sprint challenge on ${subject}`;
+  }
+  // Stretch challenge 
+  graduate() {
+    if (this.grade > 70) {
+      return `${this.name} is ready to graduate!`;
+    } else {
+      return `${this.name} needs after hour support`;
+    }
+  }
 
 }
 
@@ -170,9 +216,21 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+class ProjectManager  extends Instructor {
+  constructor(person) {
+    super(person);
+      this.gradClassName = person.gradClassName;
+      this.favInstructor = person.favInstructor;
+    }
+    standUp(channel) {
+      return `${this.name} announces to ${channel}, @channel standup times!`
+    }
+    debugsCode(student, subject) {
+      return `${this.name} debugs ${student.name}'s code on ${subject}`;
+    }
+  }
 
-}
+
 
 /*
   STRETCH PROBLEM (no tests!)
